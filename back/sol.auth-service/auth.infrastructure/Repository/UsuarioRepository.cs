@@ -3,6 +3,9 @@ using auth.application.Interface;
 using auth.domain.DTO.Exceptions;
 using auth.domain.DTO.Helpers;
 using auth.domain.DTO.Usuario;
+using auth.domain.Models;
+using auth.infrastructure.Data;
+using AutoMapper;
 using Microsoft.Extensions.Logging;
 
 
@@ -10,12 +13,18 @@ namespace auth.infrastructure.Repository
 {
     public class UsuarioRepository : IUsuarioService
     {
-        private readonly ILogger<AuthRepository> _logger;
         private readonly IJwTokenGenerator _jwTokenGenerator;
-        public UsuarioRepository(ILogger<AuthRepository> logger, IJwTokenGenerator jwTokenGenerator)
+        private readonly IEncriptService _enscriptService;
+        private readonly IMapper _mapper;
+        private readonly usuarioContext _usuarioContext;
+        public UsuarioRepository( IJwTokenGenerator jwTokenGenerator, IEncriptService enscriptService,IMapper mapper
+            ,usuarioContext usuarioContext
+            )
         {
-            _logger = logger;
             _jwTokenGenerator = jwTokenGenerator;
+            _enscriptService = enscriptService;
+            _mapper = mapper;
+            _usuarioContext = usuarioContext;
         }
 
         public async Task<DtoResponse<List<UsuarioList>>> GetAsync()
@@ -28,15 +37,22 @@ namespace auth.infrastructure.Repository
         {
             try
             {
-                _logger.LogInformation("Insertando usuario: {Email}", request.Correo);
+                var generateSalt = _enscriptService.GenerateSaltPassword();
+                var generatePasswoord = _enscriptService.CreateHashPassword(request.HashContrasena,generateSalt);
                 
-                _logger.LogInformation("Usuario insertado correctamente: {Email}", request.Correo);
-               
+                request.SaltContrasena = generateSalt;
+                request.HashContrasena = generatePasswoord;
+                
+                var mapper = _mapper.Map<Usuario>(request);
+
+                _usuarioContext.Add(mapper);
+                await _usuarioContext.SaveChangesAsync();
+
                 return CreateResponse.Success("Usuario registrado correctamente");
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error al insertar usuario: {Email}", request.Correo);
+                
                 throw new Exception("Error al registrar el usuario");
             }
         }

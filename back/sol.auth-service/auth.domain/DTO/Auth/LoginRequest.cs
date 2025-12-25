@@ -10,7 +10,8 @@ namespace auth.domain.DTO.Auth
         /// <summary>
         /// Correo electrónico del usuario
         /// </summary>
-        public string Email { get; set; } = "";
-        public string Password { get; set; } = "";
+        public string CorreoElectronico { get; set; } = null!;
+
+        public string HashContrasena { get; set; } = null!;
     }
 }

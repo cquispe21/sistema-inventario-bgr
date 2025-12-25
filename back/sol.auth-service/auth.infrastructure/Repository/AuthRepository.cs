@@ -3,7 +3,11 @@ using auth.application.Interface;
 using auth.domain.DTO.Auth;
 using auth.domain.DTO.Exceptions;
 using auth.domain.DTO.Helpers;
+using auth.infrastructure.Data;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 
 
 namespace auth.infrastructure.Repository
@@ -13,32 +17,56 @@ namespace auth.infrastructure.Repository
 
         private readonly ILogger<AuthRepository> _logger;
         public readonly IJwTokenGenerator _jwTokenGenerator;
+        private readonly usuarioContext _usuarioContext;
+        private readonly IEncriptService _enscriptService;
 
-        public AuthRepository(ILogger<AuthRepository> logger, IJwTokenGenerator jwTokenGenerator)
+
+        public AuthRepository(ILogger<AuthRepository> logger, IJwTokenGenerator jwTokenGenerator,usuarioContext usuarioContext, IEncriptService enscriptService)
         {
             _logger = logger;
             _jwTokenGenerator = jwTokenGenerator;
+            _usuarioContext = usuarioContext;
+            _enscriptService = enscriptService;
         }
         public async Task<DtoResponse<LoginResponse>> IniciaSesionAsync(LoginRequest request)
         {
             try
             {
-                _logger.LogInformation("Iniciando sesión para el usuario: {Email}", request.Email);
-                string session =  _jwTokenGenerator.GenerateTokenSignIn(Guid.NewGuid(),"CristhianDavid","jair8381@gmail.com");
-                if (session == null || string.IsNullOrEmpty(session)) throw new Exception();
+                var usuario = await _usuarioContext.Usuarios
+                .FirstOrDefaultAsync(x => x.CorreoElectronico == request.CorreoElectronico);
 
-                var objetSession = new LoginResponse
+                if (usuario == null)
                 {
-                    Token = session,
-                    
-                };
-                _logger.LogInformation("Sesión iniciada correctamente para el usuario: {Email}", request.Email);
+                    throw new Exception("El correo no existe");
+                }
 
-                return CreateResponse.Success(objetSession, "Credenciales correctas");
+                var generatePasswoord = _enscriptService.CreateHashPassword(request.HashContrasena, usuario.SaltContrasena);
+
+                if(generatePasswoord == usuario.HashContrasena)
+                {
+                    string session = _jwTokenGenerator.GenerateTokenSignIn(
+                                   usuario.IdUsuario,
+                                   usuario.NombreUsuario,
+                                   usuario.CorreoElectronico
+                   );
+
+                    var objetSession = new LoginResponse
+                    {
+                        Token = session,
+
+                    };
+
+                    return CreateResponse.Success(objetSession, "Credenciales correctas");
+                }
+                else
+                {
+                    throw CreateResponse.Error("Credenciales incorrectas", 404);
+
+                }
+
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error al iniciar sesión para el usuario: {Email}", request.Email);
                 throw CreateResponse.Error("Credenciales incorrectas", 404);
 
             }

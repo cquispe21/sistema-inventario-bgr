@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿
 
-namespace auth.infrastructure.Models;
+namespace auth.domain.Models;
 
 public partial class Usuario
 {

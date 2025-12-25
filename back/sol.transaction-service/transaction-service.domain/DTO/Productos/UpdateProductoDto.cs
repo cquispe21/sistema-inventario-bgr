@@ -2,20 +2,22 @@
 
 namespace product_service.domain.DTO.Productos
 {
-    public class UpdateProductoDto
+    public class UpdateTransaccionDto
     {
-        public string NameProduct { get; set; } = null!;
+        public Guid IdTransaccion { get; set; }
 
-        public string? DescriptionProduct { get; set; }
+        public DateTime FechaTransaccion { get; set; }
 
-        public string CategoryProduct { get; set; } = null!;
+        public string TipoTransaccion { get; set; } = null!;
 
-        public string? ImageUrlProduct { get; set; }
+        public Guid IdProducto { get; set; }
 
-        public decimal PriceProduct { get; set; }
+        public int Cantidad { get; set; }
 
-        public int StockProduct { get; set; }
+        public decimal PrecioUnitario { get; set; }
 
-        public bool IsActive { get; set; }
+        public string? Detalle { get; set; }
+
+        public DateTime FechaCreacion { get; set; }
     }
 }
