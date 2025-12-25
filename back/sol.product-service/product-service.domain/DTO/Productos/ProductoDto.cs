@@ -3,24 +3,24 @@ namespace product_service.domain.DTO.Productos
 {
     public class ProductoDto
     {
-        public Guid IdProduct { get; set; }
+        public Guid IdProducto { get; set; }
 
-        public string NameProduct { get; set; } = null!;
+        public string NombreProducto { get; set; } = null!;
 
-        public string? DescriptionProduct { get; set; }
+        public string? DescripcionProducto { get; set; }
 
-        public string CategoryProduct { get; set; } = null!;
+        public string CategoriaProducto { get; set; } = null!;
 
-        public string? ImageUrlProduct { get; set; }
+        public string? UrlImagenProducto { get; set; }
 
-        public decimal PriceProduct { get; set; }
+        public decimal PrecioProducto { get; set; }
 
-        public int StockProduct { get; set; }
+        public int StockProducto { get; set; }
 
-        public bool IsActive { get; set; }
+        public bool Activo { get; set; }
 
-        public DateTime CreatedAt { get; set; }
+        public DateTime FechaCreacion { get; set; }
 
-        public DateTime UpdatedAt { get; set; }
+        public DateTime FechaActualizacion { get; set; }
     }
 }

@@ -19,5 +19,10 @@
 	<ItemGroup>
     <ProjectReference Include="..\product-service.application\product-service.application.csproj" />
   </ItemGroup>
+	
+	<ItemGroup>
+	  <Folder Include="helper\" />
+	  <Folder Include="NewFolder\" />
+	</ItemGroup>
 
 </Project>

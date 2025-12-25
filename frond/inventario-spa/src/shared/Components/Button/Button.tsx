@@ -1,3 +1,5 @@
+import type { JSX } from "react";
+
 interface ButtonIPropsItems {
   text?: string;
   style?: string;

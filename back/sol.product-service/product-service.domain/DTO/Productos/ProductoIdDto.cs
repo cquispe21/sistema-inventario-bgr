@@ -1,12 +1,11 @@
 ﻿
 
-using Microsoft.AspNetCore.Http;
-
 namespace product_service.domain.DTO.Productos
 {
-    public class CreateProductoDto
+    public class ProductoIdDto
     {
-      
+        public Guid IdProducto { get; set; }
+
         public string NombreProducto { get; set; } = null!;
 
         public string? DescripcionProducto { get; set; }
@@ -19,8 +18,10 @@ namespace product_service.domain.DTO.Productos
 
         public int StockProducto { get; set; }
 
-        public IFormFile? Imagen { get; set; }
+        public bool Activo { get; set; }
 
+        public DateTime FechaCreacion { get; set; }
 
+        public DateTime FechaActualizacion { get; set; }
     }
 }

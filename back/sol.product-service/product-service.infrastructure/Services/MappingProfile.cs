@@ -16,6 +16,13 @@ namespace product_service.infrastructure.Services
            .ForMember(d => d.FechaCreacion, o => o.MapFrom(_ => DateTime.Now))
            .ForMember(d => d.FechaActualizacion, o => o.MapFrom(_ => DateTime.Now));
 
+            CreateMap<Producto, ProductoDto>()
+                .ForMember(dest => dest.UrlImagenProducto, opt => opt.Ignore());
+
+            CreateMap<Producto, ProductoIdDto>();
+
+            CreateMap<UpdateProductoDto, Producto>();
+
         }
     }
 }

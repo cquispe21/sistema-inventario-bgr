@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using product_service.application.Interfaces;
 using product_service.infrastructure.Context;
 using product_service.infrastructure.Repository;
+using product_service.infrastructure.Services;
 using System.Reflection;
 
 namespace product_service.infrastructure.ioc
@@ -16,7 +17,8 @@ namespace product_service.infrastructure.ioc
         {
           
             services.AddScoped<IProductoService, ProductoRepository>();
-          
+            services.AddScoped<IBase64Service, ImgBase64>();
+
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
             var builderConnection = new SqlConnectionStringBuilder(configuration.GetConnectionString("InventarioBGR"));

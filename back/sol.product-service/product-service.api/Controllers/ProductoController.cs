@@ -26,7 +26,8 @@ namespace product_service.api.Controllers
         [SwaggerResponse(500, "Error interno en el servidor")]
         [AllowAnonymous]
         [HttpPost("insertAsync")]
-        public async Task<IActionResult> InsertAsync([FromBody] CreateProductoDto request)
+        [Consumes("multipart/form-data")]
+        public async Task<IActionResult> InsertAsync([FromForm] CreateProductoDto request)
         {
             return Ok(await _productoService.InsertAsync(request));
         }
@@ -43,6 +44,18 @@ namespace product_service.api.Controllers
             return Ok(await _productoService.GetAsync());
         }
 
+        [SwaggerOperation(
+  Summary = "Servicio que enlista los Producto disponibles",
+  OperationId = "getAsync")]
+        [SwaggerResponse(200, "Lista de Producto disponibles")]
+        [SwaggerResponse(500, "Error interno en el servidor")]
+        [AllowAnonymous]
+        [HttpGet("getAsyncId")]
+        public async Task<IActionResult> GetAsyncId([FromQuery]Guid IdProducto)
+        {
+            return Ok(await _productoService.GetAsyncId(IdProducto));
+        }
+
 
         [SwaggerOperation(
     Summary = "Servicio que enlista los Producto disponibles",
@@ -50,8 +63,9 @@ namespace product_service.api.Controllers
         [SwaggerResponse(200, "Lista de Producto disponibles")]
         [SwaggerResponse(500, "Error interno en el servidor")]
         [AllowAnonymous]
-        [HttpGet("UpdateAsync")]
-        public async Task<IActionResult> UpdateAsync(UpdateProductoDto request)
+        [HttpPut("UpdateAsync")]
+        [Consumes("multipart/form-data")]
+        public async Task<IActionResult> UpdateAsync([FromForm] UpdateProductoDto request)
         {
             return Ok(await _productoService.UpdateAsync(request));
         }
@@ -62,7 +76,7 @@ namespace product_service.api.Controllers
         [SwaggerResponse(200, "Lista de Producto disponibles")]
         [SwaggerResponse(500, "Error interno en el servidor")]
         [AllowAnonymous]
-        [HttpGet("DeleteAsync")]
+        [HttpPut("DeleteAsync")]
         public async Task<IActionResult> DeleteAsync(Guid IdProduct)
         {
             return Ok(await _productoService.DeleteAsync(IdProduct));

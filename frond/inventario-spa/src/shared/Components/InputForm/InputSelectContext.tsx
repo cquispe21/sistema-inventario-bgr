@@ -1,4 +1,4 @@
-import { RegisterOptions, useFormContext } from "react-hook-form";
+import { type RegisterOptions, useFormContext } from "react-hook-form";
 
 export class InputSelectOptions {
   value?: string;

@@ -11,15 +11,16 @@
   },
   "dependencies": {
     "@headlessui/react": "^1.7.13",
-    "moment": "^2.29.4",
     "@tailwindcss/vite": "^4.1.18",
+    "axios": "^1.13.2",
+    "moment": "^2.29.4",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.54.1",
     "react-router-dom": "^7.0.2",
     "sonner": "^2.0.3",
-    "uuidv4": "^6.2.13",
-    "tailwindcss": "^4.1.18"
+    "tailwindcss": "^4.1.18",
+    "uuidv4": "^6.2.13"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
