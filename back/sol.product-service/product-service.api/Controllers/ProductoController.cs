@@ -20,7 +20,7 @@ namespace product_service.api.Controllers
 
 
         [SwaggerOperation(
-       Summary = "Servicio que registra un nuevo usuario",
+       Summary = "Servicio que registra un nuevo Producto",
        OperationId = "InsertAsync")]
         [SwaggerResponse(202, "Nuevo usuario registrado")]
         [SwaggerResponse(500, "Error interno en el servidor")]
@@ -32,9 +32,9 @@ namespace product_service.api.Controllers
         }
 
         [SwaggerOperation( 
-    Summary = "Servicio que enlista los usuarios disponibles",
+    Summary = "Servicio que enlista los Producto disponibles",
     OperationId = "getAsync")]
-        [SwaggerResponse(200, "Lista de usuarios disponibles")]
+        [SwaggerResponse(200, "Lista de Producto disponibles")]
         [SwaggerResponse(500, "Error interno en el servidor")]
         [AllowAnonymous]
         [HttpGet("getAsync")]
@@ -45,9 +45,9 @@ namespace product_service.api.Controllers
 
 
         [SwaggerOperation(
-    Summary = "Servicio que enlista los usuarios disponibles",
+    Summary = "Servicio que enlista los Producto disponibles",
     OperationId = "UpdateAsync")]
-        [SwaggerResponse(200, "Lista de usuarios disponibles")]
+        [SwaggerResponse(200, "Lista de Producto disponibles")]
         [SwaggerResponse(500, "Error interno en el servidor")]
         [AllowAnonymous]
         [HttpGet("UpdateAsync")]
@@ -57,9 +57,9 @@ namespace product_service.api.Controllers
         }
 
         [SwaggerOperation(
-   Summary = "Servicio que enlista los usuarios disponibles",
+   Summary = "Servicio que enlista los Producto disponibles",
    OperationId = "DeleteAsync")]
-        [SwaggerResponse(200, "Lista de usuarios disponibles")]
+        [SwaggerResponse(200, "Lista de Producto disponibles")]
         [SwaggerResponse(500, "Error interno en el servidor")]
         [AllowAnonymous]
         [HttpGet("DeleteAsync")]

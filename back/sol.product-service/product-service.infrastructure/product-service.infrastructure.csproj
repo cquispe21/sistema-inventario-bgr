@@ -8,7 +8,15 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="AutoMapper" Version="13.0.1" />
+	<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.6" />
+	<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.6" />
+	<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.6" />
+	</ItemGroup>
+	
+	<ItemGroup>
     <ProjectReference Include="..\product-service.application\product-service.application.csproj" />
   </ItemGroup>
 

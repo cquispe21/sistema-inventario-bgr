@@ -4,6 +4,8 @@ namespace product_service.domain.DTO.Productos
 {
     public class UpdateProductoDto
     {
+        public Guid IdProducto { get; set; }
+
         public string NameProduct { get; set; } = null!;
 
         public string? DescriptionProduct { get; set; }
