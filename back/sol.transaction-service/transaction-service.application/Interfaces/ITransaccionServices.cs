@@ -9,6 +9,6 @@ namespace transaction_service.application.Interfaces
         Task<DtoResponse> InsertAsync(CreateTransactionDto request);
         Task<DtoResponse<List<TransaccionDto>>> GetAsync();
         Task<DtoResponse> UpdateAsync(UpdateTransaccionDto request);
-        Task<DtoResponse> DeleteAsync(Guid IdTransaccion);
+        //Task<DtoResponse> DeleteAsync(Guid IdTransaccion);
     }
 }

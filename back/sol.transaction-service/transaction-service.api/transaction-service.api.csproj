@@ -15,6 +15,13 @@
 		  <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.6" />
 		  <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.6" />
 		  <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.6" />
+		  <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="10.1.0" />
+  </ItemGroup>
+
+
+
+  <ItemGroup>
+    <ProjectReference Include="..\transaction-service.application\transaction-service.application.csproj" />
   </ItemGroup>
 
 </Project>

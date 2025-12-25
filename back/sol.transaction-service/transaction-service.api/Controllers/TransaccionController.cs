@@ -53,17 +53,17 @@ namespace transaction_service.api.Controllers
             return Ok(await _transaccionService.UpdateAsync(request));
         }
 
-        [SwaggerOperation(
-   Summary = "Servicio que enlista los usuarios disponibles",
-   OperationId = "DeleteAsync")]
-        [SwaggerResponse(200, "Lista de usuarios disponibles")]
-        [SwaggerResponse(500, "Error interno en el servidor")]
-        [AllowAnonymous]
-        [HttpGet("DeleteAsync")]
-        public async Task<IActionResult> DeleteAsync(Guid IdProduct)
-        {
-            return Ok(await _transaccionService.DeleteAsync(IdProduct));
-        }
+   //     [SwaggerOperation(
+   //Summary = "Servicio que enlista los usuarios disponibles",
+   //OperationId = "DeleteAsync")]
+   //     [SwaggerResponse(200, "Lista de usuarios disponibles")]
+   //     [SwaggerResponse(500, "Error interno en el servidor")]
+   //     [AllowAnonymous]
+   //     [HttpGet("DeleteAsync")]
+   //     public async Task<IActionResult> DeleteAsync(Guid IdProduct)
+   //     {
+   //         return Ok(await _transaccionService.DeleteAsync(IdProduct));
+   //     }
 
 
     }
