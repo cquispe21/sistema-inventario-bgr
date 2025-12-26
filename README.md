@@ -28,6 +28,9 @@ El sistema utiliza **Authorization Bearer (JWT)** para la seguridad de los endpo
 
 En la raíz del proyecto se incluye la carpeta "02-scripts" el archivo:
 
+(Omitir la ejecucion del 01-script.sql, mejor hacer el restore del backup)
+(solamente lo adjunte como documento entregable, como se indico)
+
 ```
 01-script.sql
 ```
