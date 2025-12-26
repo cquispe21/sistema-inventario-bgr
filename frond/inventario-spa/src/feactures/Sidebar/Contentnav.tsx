@@ -46,7 +46,9 @@ function Contentnav({
         </button>
         <ul className="space-y-1">
           <>
-            <Link to="/vito/tareas">
+         
+
+                    <Link to="/productos">
               <li
                 className={` group flex hover:bg-gray-200 hover:text-gray-900  text-gray-300 items-center rounded-md  px-2 py-2 text-sm font-medium  peer-checked:bg-slate-900 
                        `}
@@ -68,13 +70,85 @@ function Contentnav({
                 </svg>
                 {(isHovered && !OpenMenu) || OpenMenu || OpenMenuMobile ? (
                   <p className=" dark:group-hover:text-black group-hover:text-black">
-                    Inicio
+                    PRODUCTOS
                   </p>
                 ) : (
                   <></>
                 )}
               </li>
             </Link>
+
+
+
+
+                      <Link to="/transacciones">
+              <li
+                className={` group flex hover:bg-gray-200 hover:text-gray-900  text-gray-300 items-center rounded-md  px-2 py-2 text-sm font-medium  peer-checked:bg-slate-900 
+                       `}
+              >
+                <svg
+                  className="mr-3 h-6 w-6 flex-shrink-0  my-auto dark:group-hover:text-black group-hover:text-black"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+                  />
+                </svg>
+                {(isHovered && !OpenMenu) || OpenMenu || OpenMenuMobile ? (
+                  <p className=" dark:group-hover:text-black group-hover:text-black">
+                   TRANSACCIONES
+                  </p>
+                ) : (
+                  <></>
+                )}
+              </li>
+            </Link>
+
+
+              <li
+
+
+onClick={
+ 
+  () => {    localStorage.removeItem("token_taxflash");
+    window.location.href = "/login";
+  }
+}
+
+                className={` group flex hover:bg-gray-200 hover:text-gray-900  text-gray-300 items-center rounded-md  px-2 py-2 text-sm font-medium  peer-checked:bg-slate-900 
+                       `}
+              >
+                <svg
+                  className="mr-3 h-6 w-6 flex-shrink-0  my-auto dark:group-hover:text-black group-hover:text-black"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+                  />
+                </svg>
+                {(isHovered && !OpenMenu) || OpenMenu || OpenMenuMobile ? (
+                  <p className=" dark:group-hover:text-black group-hover:text-black">
+                   cerrar sesión
+                  </p>
+                ) : (
+                  <></>
+                )}
+              </li>
+       
           </>
         </ul>
 

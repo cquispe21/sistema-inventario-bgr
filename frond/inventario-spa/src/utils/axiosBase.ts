@@ -5,7 +5,7 @@ export const createAxiosClient = (baseURL: string) => {
 
   instance.interceptors.request.use(
     (config) => {
-      const token = localStorage.getItem("token_taxflash");
+      const token = localStorage.getItem("token_bgr");
       if (token) {
         config.headers.Authorization = `Bearer ${token}`;
       }

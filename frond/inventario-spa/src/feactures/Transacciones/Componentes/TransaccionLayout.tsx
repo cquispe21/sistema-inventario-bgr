@@ -34,12 +34,7 @@ export default function TransaccionLayout() {
               >
                 + Nueva transacción
               </button>
-              <button
-                //onClick={resetFilters}
-                className="inline-flex items-center justify-center rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-800 hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-300"
-              >
-                Limpiar filtros
-              </button>
+         
             </div>
           </div>
         </div>

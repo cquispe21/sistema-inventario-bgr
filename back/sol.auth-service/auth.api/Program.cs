@@ -17,7 +17,16 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddHttpClient();
 
-
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(policy =>
+    {
+        policy
+            .AllowAnyOrigin()
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
+});
 
 var app = builder.Build();
 
@@ -39,4 +48,5 @@ app.ConfigureExceptionHandler();
 
 app.MapControllers();
 
+app.UseCors();
 app.Run();

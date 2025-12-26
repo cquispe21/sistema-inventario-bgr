@@ -126,7 +126,7 @@ const finalPreview = previewUrl ?? serverPreviewUrl;
                 />
 
                 <p className="mt-1 text-xs text-slate-500">
-                  PNG/JPG recomendado. Máx 2–5MB (según backend).
+                  PNG/JPG recomendado. Máx 2–5MB .
                 </p>
               </div>
               <InputSelectContext

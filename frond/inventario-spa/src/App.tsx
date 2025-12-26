@@ -1,19 +1,23 @@
-import { Navigate, Route, Routes } from "react-router-dom";
-import "./App.css";
-import Inicio from "./feactures/Inicio/Inicio";
+import {  Routes, Route } from "react-router-dom";
+import ProtectedRoute from "./shared/routes/ProtectedRoute";
+import LoginIndex from "./feactures/Login/LoginIndex";
 import ProductosIndex from "./feactures/Productos/ProductosIndex";
 import TransaccionIndex from "./feactures/Transacciones/TransaccionIndex";
+import "./App.css";
 
-function App() {
+export default function App() {
   return (
-    <Routes>
-      <Route path="/" element={<Navigate to="/bgr" />} />
-      <Route path="/bgr" element={<Inicio />}>
-        <Route path="productos" element={<ProductosIndex />} />
-        <Route path="transacciones" element={<TransaccionIndex />} />
-      </Route>
-    </Routes>
+      <Routes>
+      
+        <Route path="/login" element={<LoginIndex />} />
+
+        <Route path="*" element={<LoginIndex />} />
+     
+        <Route element={<ProtectedRoute />}>
+          
+          <Route path="/productos" element={<ProductosIndex />} />
+          <Route path="/transacciones" element={<TransaccionIndex />} />
+        </Route>
+      </Routes>
   );
 }
-
-export default App;
