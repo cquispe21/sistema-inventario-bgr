@@ -130,7 +130,7 @@ La aplicación se ejecutará en modo desarrollo y permitirá:
 
 ---
 
-##  Datos de inicio de session
+##  Datos de inicio de session (Credencial valida, si se hizo el restore de la base de datos. Caso contrario crear una cuenta en el micro auth recurso insertAsync)
 - correo: test2025@gmail.com
 - contrasena: test2025
 
