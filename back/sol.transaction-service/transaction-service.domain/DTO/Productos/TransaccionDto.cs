@@ -1,4 +1,6 @@
 ﻿
+using transaction_service.domain.Entidades;
+
 namespace product_service.domain.DTO.Productos
 {
     public class TransaccionDto
@@ -7,16 +9,17 @@ namespace product_service.domain.DTO.Productos
 
         public DateTime FechaTransaccion { get; set; }
 
-        public string TipoTransaccion { get; set; } = null!;
+        public string TipoTransaccion { get; set; } = null!; 
 
-        public Guid IdProducto { get; set; }
+        public string NombreProducto { get; set; } = null!; 
 
         public int Cantidad { get; set; }
 
         public decimal PrecioUnitario { get; set; }
 
+        public decimal Total => Cantidad * PrecioUnitario;
+
         public string? Detalle { get; set; }
 
-        public DateTime FechaCreacion { get; set; }
     }
 }

@@ -6,6 +6,9 @@ using transaction_service.application.Interfaces;
 
 namespace transaction_service.api.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
+    [Authorize]
     public class TransaccionController : ControllerBase
     {
         public readonly ITransaccionServices _transaccionService;
@@ -35,9 +38,12 @@ namespace transaction_service.api.Controllers
         [SwaggerResponse(500, "Error interno en el servidor")]
         [AllowAnonymous]
         [HttpGet("getAsync")]
-        public async Task<IActionResult> GetAsync()
+        public async Task<IActionResult> GetAsync([FromQuery] Guid? idProducto,
+    [FromQuery] string? tipoTransaccion,
+    [FromQuery] DateTime? fechaDesde,
+    [FromQuery] DateTime? fechaHasta)
         {
-            return Ok(await _transaccionService.GetAsync());
+            return Ok(await _transaccionService.GetAsync(idProducto,tipoTransaccion,fechaDesde,fechaHasta));
         }
 
 
@@ -53,17 +59,7 @@ namespace transaction_service.api.Controllers
             return Ok(await _transaccionService.UpdateAsync(request));
         }
 
-   //     [SwaggerOperation(
-   //Summary = "Servicio que enlista los usuarios disponibles",
-   //OperationId = "DeleteAsync")]
-   //     [SwaggerResponse(200, "Lista de usuarios disponibles")]
-   //     [SwaggerResponse(500, "Error interno en el servidor")]
-   //     [AllowAnonymous]
-   //     [HttpGet("DeleteAsync")]
-   //     public async Task<IActionResult> DeleteAsync(Guid IdProduct)
-   //     {
-   //         return Ok(await _transaccionService.DeleteAsync(IdProduct));
-   //     }
+
 
 
     }

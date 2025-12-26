@@ -13,7 +13,14 @@ namespace transaction_service.infrastructure.Services
         {
             CreateMap<CreateTransactionDto, TransaccionesInventario>()
            .ForMember(d => d.IdTransaccion, o => o.MapFrom(_ => Guid.NewGuid()))
+           .ForMember(d => d.FechaTransaccion, o => o.MapFrom(_ => DateTime.Now))
+
            .ForMember(d => d.FechaCreacion, o => o.MapFrom(_ => DateTime.Now));
+            CreateMap<TransaccionesInventario, TransaccionDto>()
+            .ForMember(
+                dest => dest.NombreProducto,
+                opt => opt.MapFrom(src => src.IdProductoNavigation.NombreProducto)
+            );
 
         }
     }

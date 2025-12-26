@@ -1,7 +1,5 @@
-import { useContext } from "react";
-import ModalProductos from "./Components/ModalProductos/ModalProductos";
 import ProductLayout from "./Components/ProductLayout";
-import ProductoContext, { ProductoProvider, type IProductContext } from "./Context/ProductoContext";
+import { ProductoProvider } from "./Context/ProductoContext";
 
 export default function ProductosIndex() {
 
