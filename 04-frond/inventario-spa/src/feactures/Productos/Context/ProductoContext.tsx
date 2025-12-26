@@ -1,6 +1,7 @@
 import { createContext,  useEffect, useState, type ReactNode } from "react";
 import type { CreateProductDto, ProductDto, ProductForm } from "../../../domain/ProductDto/ProductDto";
 import useProduct from "../../../application/Product/useProduct";
+import type { PaginationMeta } from "../../../domain/ResponseDto/ResponseDto";
 
 
 export interface IProductContext {
@@ -10,10 +11,15 @@ export interface IProductContext {
   products?:ProductDto[];
   createProduct: (product: ProductDto) => Promise<void>;
   updateProduct: (product: ProductDto) => Promise<void>;
-  getProducts?: () => Promise<void>;
+  getProducts: (
+    pageNumber?: number,
+    pageSize?: number
+  ) => Promise<void>;
   productSelected:ProductDto|undefined;
   setProductSelected:React.Dispatch<React.SetStateAction<ProductDto|undefined>>;
   getProductId: (IdProducto:string) => Promise<void>;
+  meta ?: PaginationMeta | null;
+
 }
 
 const ProductoContext = createContext({});
@@ -24,6 +30,9 @@ export const ProductoProvider = ({ children }: { children: ReactNode }) => {
   const [products,setProducts]=useState<ProductDto[]>([]); 
 
   const [productSelected,setProductSelected]=useState<ProductDto|undefined>(undefined);
+
+  const [meta, setMeta] = useState<PaginationMeta | null>(null);
+
 
   const { createProductService, getProductsService, getProductIdService,updateProductService } = useProduct();
 
@@ -68,9 +77,16 @@ export const ProductoProvider = ({ children }: { children: ReactNode }) => {
     toggleModal();
   }
 
-  const getProducts = async () => {
-    const res = await getProductsService();
-    setProducts(res);
+  const getProducts = async (
+    pageNumber: number = 1,
+    pageSize: number = 10
+  ) => {
+    const res = await getProductsService(
+      pageNumber,
+      pageSize
+    );
+    setProducts(res.items);
+    setMeta(res.meta);
   };
   const getProductId = async (IdProducto:string) => {
     toggleModal();
@@ -92,7 +108,8 @@ export const ProductoProvider = ({ children }: { children: ReactNode }) => {
     productSelected,
     setProductSelected,
     getProductId,
-    updateProduct
+    updateProduct,
+    meta
   };
 
   return (

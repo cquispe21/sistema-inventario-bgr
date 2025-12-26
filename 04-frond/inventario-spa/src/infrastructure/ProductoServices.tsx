@@ -1,7 +1,7 @@
 
 import type { IProductServices } from "../application/Product/IProductServices";
 import type { ProductDto } from "../domain/ProductDto/ProductDto";
-import type { ResponseDto } from "../domain/ResponseDto/ResponseDto";
+import type { PagedResult, ResponseDto } from "../domain/ResponseDto/ResponseDto";
 import ProductClient from "../utils/Clients/ProductClient";
 export default function ProductServices(): IProductServices {
 
@@ -20,8 +20,12 @@ export default function ProductServices(): IProductServices {
     return response.data;
   }
 
-  const getProductAsync = async (): Promise<ResponseDto<ProductDto[]>> => {
-    const response = await ProductClient.get("/Producto/getAsync");
+  const getProductAsync = async (
+
+    pageNumber: number = 1,
+    pageSize: number = 10
+  ): Promise<ResponseDto<PagedResult<ProductDto[]>>> => {
+    const response = await ProductClient.get("/Producto/getAsync",{ params: { pageNumber, pageSize } });
     
     return response.data.data;
 

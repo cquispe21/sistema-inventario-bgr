@@ -13,8 +13,11 @@ export default function useProduct() {
     await updateProductAsync(product);
   }
 
-  const getProductsService = async (): Promise<ProductDto[]> => {
-    return await getProductAsync();
+  const getProductsService = async (
+    pageNumber: number = 1,
+    pageSize: number = 10
+  ): Promise<ProductDto[]> => {
+    return await getProductAsync(pageNumber, pageSize);
   };
 
   const getProductIdService = async (IdProducto: string): Promise<ProductDto> => {

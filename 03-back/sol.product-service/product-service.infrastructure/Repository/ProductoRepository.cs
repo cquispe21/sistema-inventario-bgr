@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using product_service.application.Interfaces;
 using product_service.domain.DTO.Exceptions;
 using product_service.domain.DTO.Helpers;
+using product_service.domain.DTO.Pagination;
 using product_service.domain.DTO.Productos;
 using product_service.domain.Entidades;
 using product_service.infrastructure.Context;
@@ -78,23 +79,52 @@ namespace product_service.infrastructure.Repository
             }
         }
 
-        public async Task<DtoResponse<List<ProductoDto>>> GetAsync()
+        public async Task<DtoResponse<PagedResult<ProductoDto>>> GetAsync(int pageNumber = 1, int pageSize = 10)
         {
+            if (pageNumber < 1) pageNumber = 1;
+            if (pageSize < 1) pageSize = 10;
+
+            const int maxPageSize = 100;
+            if (pageSize > maxPageSize) pageSize = maxPageSize;
+
             try
             {
-                var productos = await _context.Productos
-                    .AsNoTracking()
+                var query = _context.Productos.AsNoTracking();
+
+                var totalItems = await query.CountAsync();
+
+                var productos = await query
+                    .OrderBy(x => x.IdProducto)
+                    .Skip((pageNumber - 1) * pageSize)
+                    .Take(pageSize)
                     .ToListAsync();
 
-                var dto = _mapper.Map<List<ProductoDto>>(productos);
-                
-                return CreateResponse.Success(dto, "Listado obtenido correctamente");
+                var items = _mapper.Map<List<ProductoDto>>(productos);
+
+                var totalPages = (int)Math.Ceiling(totalItems / (double)pageSize);
+
+                var paged = new PagedResult<ProductoDto>
+                {
+                    Items = items,
+                    Meta = new PaginationMeta
+                    {
+                        PageNumber = pageNumber,
+                        PageSize = pageSize,
+                        TotalItems = totalItems,
+                        TotalPages = totalPages,
+                        HasPrevious = pageNumber > 1,
+                        HasNext = pageNumber < totalPages
+                    }
+                };
+
+                return CreateResponse.Success(paged, "Listado paginado obtenido correctamente");
             }
             catch
             {
                 throw CreateResponse.Error("Ocurrió un error", 500);
             }
         }
+
 
         public async Task<DtoResponse<ProductoIdDto>> GetAsyncId(Guid IdProducto)
         {

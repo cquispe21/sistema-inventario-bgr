@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using product_service.application.Interfaces;
+using product_service.domain.DTO.Helpers;
 using product_service.domain.DTO.Productos;
 using Swashbuckle.AspNetCore.Annotations;
 
@@ -32,16 +33,22 @@ namespace product_service.api.Controllers
             return Ok(await _productoService.InsertAsync(request));
         }
 
-        [SwaggerOperation( 
-    Summary = "Servicio que enlista los Producto disponibles",
-    OperationId = "getAsync")]
-        [SwaggerResponse(200, "Lista de Producto disponibles")]
+        [SwaggerOperation(
+      Summary = "Servicio que enlista los Productos disponibles (paginado)",
+      OperationId = "getAsync")]
+        [SwaggerResponse(200, "Lista paginada de Productos disponibles")]
+        [SwaggerResponse(400, "Parámetros de paginación inválidos")]
         [SwaggerResponse(500, "Error interno en el servidor")]
         [AllowAnonymous]
         [HttpGet("getAsync")]
-        public async Task<IActionResult> GetAsync()
+        public async Task<IActionResult> GetAsync(
+      [FromQuery] int pageNumber = 1,
+      [FromQuery] int pageSize = 10)
         {
-            return Ok(await _productoService.GetAsync());
+            
+
+            var result = await _productoService.GetAsync(pageNumber, pageSize);
+            return Ok(result);
         }
 
         [SwaggerOperation(

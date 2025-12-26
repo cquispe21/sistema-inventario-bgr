@@ -24,10 +24,7 @@ export default function ProductLayout() {
                 <h1 className="text-xl font-semibold text-slate-900">
                   Productos
                 </h1>
-                <p className="text-sm text-slate-600">
-                  Administra tu catálogo: busca, filtra, crea, edita y elimina
-                  productos.
-                </p>
+                
               </div>
 
               <div className="flex flex-wrap gap-2">
