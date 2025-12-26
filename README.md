@@ -24,7 +24,7 @@ El sistema utiliza **Authorization Bearer (JWT)** para la seguridad de los endpo
 
 ---
 
-## 🗄 Base de Datos
+## 🗄 Base de Datos (Recomendacion para levantamiento en local, hacer el restore del archivo InventarioBGR.bak)
 
 En la raíz del proyecto se incluye la carpeta "02-scripts" el archivo:
 
