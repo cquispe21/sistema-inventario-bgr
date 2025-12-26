@@ -99,7 +99,7 @@ Cada microservicio expone Swagger para pruebas y documentación de los endpoints
 
 ## 🖥 Ejecución del Frontend
 
-### 1️⃣ Configurar variables de entorno (Omitir este paso, si en los micros esta el archivo .env.development)
+### 1️⃣ Configurar variables de entorno (Omitir este paso, si en el spa esta el archivo .env.development)
 En el frontend crear un archivo `.env.development`:
 
 ```env.development
@@ -126,6 +126,15 @@ La aplicación se ejecutará en modo desarrollo y permitirá:
 - Registrar y consultar transacciones
 
 ---
+
+##  Datos de inicio de session
+- correo: test2025@gmail.com
+- contrasena: test2025
+
+---
+
+
+
 
 ## 🔐 Autenticación y Autorización
 
