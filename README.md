@@ -18,6 +18,7 @@ El sistema utiliza **Authorization Bearer (JWT)** para la seguridad de los endpo
 - **Node.js** (versión LTS recomendada)
 - **NPM**
 - **.NET SDK 8**
+- **VISUAL STUDIO 2022**
 - **SQL Server 2019 o posterior** (local o Docker)
 - (Opcional) **SQL Server Management Studio (SSMS)**
 
@@ -33,7 +34,10 @@ En la raíz del proyecto se incluye la carpeta "02-scripts" el archivo:
 
 tambien se incluye un Backup, **se recomienda hacer el restore del Backup adjuntado**
 
+```
 InventarioBGR.bak
+```
+
 
 (Este Backup esta listo con los datos de las tablas para las respectivas pruebas)
 
@@ -44,7 +48,7 @@ El Backup contiene:
 - Creación de las tablas necesarias para el sistema
 - Datos de las 3 tablas, para un testeo
 
-Antes de ejecutar el backend, se debe ejecutar este script en SQL Server.
+**Antes de ejecutar el backend, se debe hacer el restore del archivo .bak en SQL Server.**
 
 ---
 
@@ -56,7 +60,7 @@ El backend está compuesto por **3 microservicios**:
 - **Productos**
 - **Transacciones**
 
-### 1️⃣ Configurar la cadena de conexión
+### 1️⃣ Configurar la cadena de conexión (Omitir este paso, si en los micros esta el archivo appsettings.Development.json)
 En cada microservicio, configurar el archivo `appsettings.json`:
 
 ```json
@@ -73,6 +77,10 @@ dotnet restore
 dotnet build
 dotnet run
 ```
+O ejecutar en visual studio 2022 las soluciones para omision de estos comandos de consola.
+
+
+
 
 ### 3️⃣ Seguridad
 - El login devuelve un **JWT**
@@ -91,13 +99,14 @@ Cada microservicio expone Swagger para pruebas y documentación de los endpoints
 
 ## 🖥 Ejecución del Frontend
 
-### 1️⃣ Configurar variables de entorno
-En el frontend crear un archivo `.env`:
+### 1️⃣ Configurar variables de entorno (Omitir este paso, si en los micros esta el archivo .env.development)
+En el frontend crear un archivo `.env.development`:
 
-```env
-VITE_APIPRODUCT_URL=<URL_API_PRODUCTOS>
-VITE_APITRANSACCION_URL=<URL_API_TRANSACCIONES>
-VITE_APIAUTH_URL=<URL_API_AUTH>
+```env.development
+VITE_APIPRODUCT_URL=http://localhost:5144/api/
+VITE_APITRANSACCION_URL=http://localhost:5235/api/
+VITE_APILOGIN_URL=http://localhost:5034/api/
+VITE_ENV=dev
 ```
 
 ### 2️⃣ Instalar dependencias
